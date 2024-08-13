@@ -1,3 +1,17 @@
+function validateURLPattern(value) {
+  // `{query}` が含まれているかチェック
+  if (!value.includes("{query}")) {
+    return false;
+  }
+
+  // URL が `http://` または `https://` で始まっているかチェック
+  if (!(value.startsWith("http://") || value.startsWith("https://"))) {
+    return false;
+  }
+
+  return true;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const keywordContainer = document.getElementById("keywordContainer");
 
@@ -31,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
     patternSelect.innerHTML = `
       <label><input type="radio" name="pattern${index}" value="url" ${
       pattern === "url" ? "checked" : ""
-    }> URLとして検索</label>
+    }> URLとして検索({query}を含む)</label>
       <label><input type="radio" name="pattern${index}" value="query" ${
       pattern === "query" ? "checked" : ""
-    }> Search Engineでクエリとして利用</label>
+    }> googleで検索prefix</label>
     `;
 
     div.appendChild(input);
@@ -52,12 +66,21 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("saveButton").addEventListener("click", function () {
     const keywordEntries = document.querySelectorAll(".keyword-entry");
     const keywordList = [];
+    let valid_patterns_flag = true;
 
     keywordEntries.forEach((entry, index) => {
       const input = entry.querySelector("input[type='text']");
       const selectedPattern = entry.querySelector(
         `input[name='pattern${index}']:checked`
       )?.value;
+
+      if (selectedPattern == "url") {
+        if (!validateURLPattern(input.value)) {
+          alert(`Pattern at index ${index} does not satisfy url placeholder.`);
+          valid_patterns_flag = false;
+          return;
+        }
+      }
 
       if (input.value.trim() !== "") {
         keywordList.push({
@@ -67,8 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    chrome.storage.sync.set({ keywords: keywordList }, function () {
-      alert("Settings saved!");
-    });
+    if (valid_patterns_flag) {
+      chrome.storage.sync.set({ keywords: keywordList }, function () {
+        alert("Settings saved!");
+      });
+    }
   });
 });

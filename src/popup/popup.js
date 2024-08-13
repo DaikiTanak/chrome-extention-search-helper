@@ -30,13 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let url;
 
-      if (selectedPattern === "url") {
-        // URLとして検索
+      if (selectedPattern.includes("{query}")) {
+        // プレースホルダーを含む URL テンプレート
+        url = selectedPattern.replace("{query}", encodeURIComponent(input));
+      } else {
+        // URL として検索
         url = `${selectedKeyword}${input}`;
-      } else if (selectedPattern === "query") {
-        // Search Engineでクエリとして利用
-        const query = `${selectedKeyword} ${input}`;
-        url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
       }
 
       if (url) {
