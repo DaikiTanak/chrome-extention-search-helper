@@ -43,4 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
         chrome.tabs.create({ url: url });
       }
     });
+
+  // オプションページへのリンクがクリックされたときにオプションページを開く
+  optionsLink.addEventListener("click", function () {
+    chrome.runtime.openOptionsPage();
+  });
 });
