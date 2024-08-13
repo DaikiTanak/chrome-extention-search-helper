@@ -3,13 +3,15 @@
 <head>
   <title>Custom Search</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 10px; width: 300px; } /* 横幅を300pxに設定 */
+    body { font-family: Arial, sans-serif; padding: 10px; width: 300px; }
     input[type="text"] { width: 100%; padding: 5px; margin-bottom: 10px; }
     button { padding: 5px 10px; width: 100%; }
+    select { width: 100%; padding: 5px; margin-bottom: 10px; } /* ドロップダウンメニューのスタイル */
   </style>
 </head>
 <body>
   <h1>Custom Search</h1>
+  <select id="keywordSelect"></select> <!-- ドロップダウンメニュー -->
   <input type="text" id="searchInput" placeholder="Enter code...">
   <button id="searchButton">Search</button>
   <script src="popup.js"></script>
