@@ -26,15 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const input = document.getElementById("searchInput").value;
       const selectedOption = keywordSelect.options[keywordSelect.selectedIndex];
       const selectedKeyword = selectedOption.value;
-      const selectedPattern = selectedOption.dataset.pattern; // 選択されたキーワードのパターンを取得
 
       let url;
 
-      if (selectedPattern.includes("{query}")) {
+      if (selectedKeyword.includes("{query}")) {
         // プレースホルダーを含む URL テンプレート
-        url = selectedPattern.replace("{query}", encodeURIComponent(input));
+        url = selectedKeyword.replace("{query}", encodeURIComponent(input));
       } else {
-        // URL として検索
+        // search engineで検索
         url = `${selectedKeyword}${input}`;
       }
 
