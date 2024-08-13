@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Custom Search Keyword",
+    "version": "1.0",
+    "description": "Set a custom keyword and search with an additional input.",
+    "permissions": ["activeTab", "storage"],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+      }
+    },
+    "options_page": "options.html"
+  }
