@@ -4,7 +4,6 @@
   "version": "1.0",
   "description": "Set a custom keyword and search with an additional input.",
   "permissions": [
-    "activeTab",
     "storage"
   ],
   "action": {
