@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         url = selectedKeyword.replace("{query}", encodeURIComponent(input));
       } else {
         // search engineで検索
-        url = `${selectedKeyword}${input}`;
+        url = `https://www.google.co.jp/search?q=${selectedKeyword}+${input}`;
       }
 
       if (url) {
